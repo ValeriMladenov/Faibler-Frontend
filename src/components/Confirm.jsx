@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Confirm = ({
-  formData, prevStep, sendData,
+  formData, prevStep, sendDataProcess,
 }) => {
   const classes = useStyles();
   return (
@@ -64,7 +64,7 @@ const Confirm = ({
           <Formik
             initialValues={formData}
             onSubmit={() => {
-              sendData();
+              sendDataProcess();
             }}
           >
             <Form className={classes.form}>
@@ -201,5 +201,5 @@ export default Confirm;
 Confirm.propTypes = {
   formData: PropTypes.oneOfType([PropTypes.object]).isRequired,
   prevStep: PropTypes.func.isRequired,
-  sendData: PropTypes.func.isRequired,
+  sendDataProcess: PropTypes.func.isRequired,
 };

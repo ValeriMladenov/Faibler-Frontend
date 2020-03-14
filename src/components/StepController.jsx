@@ -5,12 +5,13 @@ All rights reserved.
 shall be included in all copies or substantial portions of the Software.
 */
 import React, { useState } from 'react';
+// import { useMutation } from '@apollo/react-hooks';
 import UserDetails from './UserDetails';
 import ReportDetails from './ReportDetails';
 import Confirm from './Confirm';
 import Success from './Success';
 
-export const StepController = () => {
+const StepController = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -23,10 +24,11 @@ export const StepController = () => {
     desc: '',
     photo: '',
   });
+  // const SendData = useMutation();
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
-  const sendData = () => {
-    // todo: send graphql mutation
+  const sendDataProcess = () => {
+    // SendData();
     nextStep();
   };
   switch (step) {
@@ -49,7 +51,7 @@ export const StepController = () => {
       );
     case 3:
       return (
-        <Confirm formData={formData} sendData={sendData} prevStep={prevStep} />
+        <Confirm formData={formData} sendData={sendDataProcess} prevStep={prevStep} />
       );
     default:
       return <Success />;
