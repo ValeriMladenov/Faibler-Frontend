@@ -20,6 +20,10 @@ import Grid from '@material-ui/core/Grid';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import { useQuery } from '@apollo/react-hooks';
+import MenuItem from '@material-ui/core/MenuItem';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { GETALLREGIONS } from '../utils/graphql/queries';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,30 +46,37 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  root: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    },
+  },
 }));
 
 const validationSchema = yup.object({
-  place: yup
-    .string()
-    .required('Населеното място е задължително')
-    .max(20),
-  scname: yup
-    .string()
-    .required('Името на търговския обект е задължително')
-    .max(20),
   address: yup
     .string()
     .required('Адреса е задължителен')
     .max(100),
+  scname: yup
+    .string()
+    .required('Името е задължително')
+    .max(50),
   desc: yup
     .string()
     .required('Описанието е задължително')
     .max(20),
+  region: yup
+    .string()
+    .required('Изберете област'),
 });
 const ReportDetails = ({
   formData, setFormData, prevStep, nextStep, setPicSecureUrl, trowError,
 }) => {
+  const { data, loading } = useQuery(GETALLREGIONS);
   const classes = useStyles();
+
   const uploadFile = (e) => {
     const timeStamp = Date.now() / 1000;
     const upload = new FormData();
@@ -84,6 +95,13 @@ const ReportDetails = ({
         trowError();
       });
   };
+  if (loading) {
+    return (
+      <div className={classes.root}>
+        <CircularProgress />
+      </div>
+    );
+  }
   return (
     <>
       <Container component="main" maxWidth="xs">
@@ -107,24 +125,43 @@ const ReportDetails = ({
             }}
             validationSchema={validationSchema}
           >
-            {({ errors, touched }) => (
+            {({
+              values,
+              touched,
+              errors,
+              handleChange,
+            }) => (
               <Form className={classes.form}>
-                <Field
-                  name="place"
-                  label="Населено място на търговския обект"
+                <TextField
+                  select
+                  id="region"
                   margin="normal"
-                  as={TextField}
-                  error={touched.place && errors.place}
-                  helperText={touched.place && errors.place}
+                  error={touched.region && Boolean(errors.region)}
+                  helperText={touched.region && errors.region}
+                  label="Изберете регион"
                   variant="outlined"
+                  value={values.region}
+                  onChange={handleChange('region')}
                   fullWidth
-                />
+                >
+                  {data.getAllRegions.map((regionItem) => (
+                    <MenuItem
+                      key={regionItem
+                        .id}
+                      value={regionItem
+                        .name}
+                    >
+                      {regionItem.name}
+
+                    </MenuItem>
+                  ))}
+                </TextField>
                 <Field
                   name="scname"
                   label="Име на търговския обект"
                   margin="normal"
                   as={TextField}
-                  error={touched.scname && errors.scname}
+                  error={touched.scname && Boolean(errors.scname)}
                   helperText={touched.scname && errors.scname}
                   variant="outlined"
                   fullWidth
@@ -135,7 +172,7 @@ const ReportDetails = ({
                   label="Адрес на търговския обект"
                   margin="normal"
                   as={TextField}
-                  error={touched.address && errors.address}
+                  error={touched.address && Boolean(errors.address)}
                   helperText={touched.address && errors.address}
                   variant="outlined"
                   fullWidth
@@ -145,7 +182,7 @@ const ReportDetails = ({
                   label="Нарушение (пр. Работещо заведение)"
                   margin="normal"
                   as={TextField}
-                  error={touched.desc && errors.desc}
+                  error={touched.desc && Boolean(errors.desc)}
                   helperText={touched.desc && errors.desc}
                   variant="outlined"
                   fullWidth

@@ -1,6 +1,14 @@
 /* eslint-disable import/prefer-default-export */
 import gql from 'graphql-tag';
 
+export const GETALLREGIONS = gql`
+{
+  getAllRegions{
+    id
+    name
+  }
+}
+`;
 export const GENERATE_TOKEN = gql`
 mutation generateToken(
   $firstName: String!
@@ -23,7 +31,7 @@ export const SEND_REPORT = gql`
 mutation newReport(
   $name: String!
   $address: String!
-  $place: String!
+  $region: String!
   $description: String!
   $photo: String!
 ) {
@@ -31,7 +39,7 @@ mutation newReport(
     newReportInput: {
       name: $name
       address: $address
-      place: $place
+      region: $region
       description: $description
       photo: $photo
     }

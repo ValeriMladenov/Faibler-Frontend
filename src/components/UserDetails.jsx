@@ -93,7 +93,7 @@ const UserDetails = ({ formData, setFormData, nextStep }) => {
                       label="Име"
                       margin="normal"
                       as={TextField}
-                      error={touched.firstName && errors.firstName}
+                      error={touched.firstName && Boolean(errors.firstName)}
                       helperText={touched.firstName && errors.firstName}
                       variant="outlined"
                       fullWidth
@@ -105,7 +105,7 @@ const UserDetails = ({ formData, setFormData, nextStep }) => {
                       label="Фамилия"
                       margin="normal"
                       as={TextField}
-                      error={touched.lastName && errors.lastName}
+                      error={touched.lastName && Boolean(errors.lastName)}
                       helperText={touched.lastName && errors.lastName}
                       variant="outlined"
                       fullWidth
@@ -118,7 +118,7 @@ const UserDetails = ({ formData, setFormData, nextStep }) => {
                   label="Имейл"
                   margin="normal"
                   as={TextField}
-                  error={touched.email && errors.email}
+                  error={touched.email && Boolean(errors.email)}
                   helperText={touched.email && errors.email}
                   variant="outlined"
                   fullWidth
@@ -129,7 +129,7 @@ const UserDetails = ({ formData, setFormData, nextStep }) => {
                   label="Телефон"
                   margin="normal"
                   as={TextField}
-                  error={touched.phone && errors.phone}
+                  error={touched.phone && Boolean(errors.phone)}
                   helperText={touched.phone && errors.phone}
                   variant="outlined"
                   fullWidth

@@ -23,9 +23,9 @@ const StepController = () => {
     lastName: '',
     phone: '',
     email: '',
-    place: '',
-    scname: '',
+    region: '',
     address: '',
+    scname: '',
     desc: '',
   });
   const [picSecureUrl, setPicSecureUrl] = useState('');
@@ -54,7 +54,7 @@ const StepController = () => {
     variables: {
       name: formData.scname,
       address: formData.address,
-      place: formData.place,
+      region: formData.region,
       description: formData.desc,
       photo: picSecureUrl,
     },
@@ -63,7 +63,6 @@ const StepController = () => {
     sendReport();
   };
   const generateTokenProcess = () => generateToken();
-
   switch (step) {
     case 0:
       return <Error />;
