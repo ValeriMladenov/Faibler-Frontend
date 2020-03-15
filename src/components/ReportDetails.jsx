@@ -189,10 +189,10 @@ const ReportDetails = ({
                 />
                 <Field
                   type="file"
-                  onChange={uploadFile}
+                  onChange={(e) => uploadFile(e)}
                   name="photo"
-                  margin="normal"
                   as={TextField}
+                  margin="normal"
                   variant="outlined"
                   fullWidth
                 />
