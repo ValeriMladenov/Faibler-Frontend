@@ -5,6 +5,7 @@ All rights reserved.
 shall be included in all copies or substantial portions of the Software.
 */
 import React from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
 import TextField from '@material-ui/core/TextField';
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const validationSchema = yup.object({
-  city: yup
+  place: yup
     .string()
     .required('Населеното място е задължително')
     .max(20),
@@ -61,10 +62,28 @@ const validationSchema = yup.object({
     .required('Описанието е задължително')
     .max(20),
 });
-const UserDetails = ({
-  formData, setFormData, prevStep, nextStep,
+const ReportDetails = ({
+  formData, setFormData, prevStep, nextStep, setPicSecureUrl, trowError,
 }) => {
   const classes = useStyles();
+  const uploadFile = (e) => {
+    const timeStamp = Date.now() / 1000;
+    const upload = new FormData();
+    upload.append('api_key', '653866232188869');
+    upload.append('file', e.target.files[0]);
+    upload.append('public_id', 'report_image');
+    upload.append('timestamp', timeStamp);
+    upload.append('upload_preset', 'reportPhoto');
+
+    axios
+      .post('https://api.cloudinary.com/v1_1/dyiahupok/image/upload', upload)
+      .then((result) => {
+        setPicSecureUrl(result.data.secure_url);
+      })
+      .catch(() => {
+        trowError();
+      });
+  };
   return (
     <>
       <Container component="main" maxWidth="xs">
@@ -91,12 +110,12 @@ const UserDetails = ({
             {({ errors, touched }) => (
               <Form className={classes.form}>
                 <Field
-                  name="city"
+                  name="place"
                   label="Населено място на търговския обект"
                   margin="normal"
                   as={TextField}
-                  error={touched.city && errors.city}
-                  helperText={touched.city && errors.city}
+                  error={touched.place && errors.place}
+                  helperText={touched.place && errors.place}
                   variant="outlined"
                   fullWidth
                 />
@@ -133,6 +152,7 @@ const UserDetails = ({
                 />
                 <Field
                   type="file"
+                  onChange={uploadFile}
                   name="photo"
                   margin="normal"
                   as={TextField}
@@ -185,9 +205,11 @@ const UserDetails = ({
   );
 };
 
-export default UserDetails;
+export default ReportDetails;
 
-UserDetails.propTypes = {
+ReportDetails.propTypes = {
+  trowError: PropTypes.func.isRequired,
+  setPicSecureUrl: PropTypes.func.isRequired,
   formData: PropTypes.oneOfType([PropTypes.object]).isRequired,
   setFormData: PropTypes.func.isRequired,
   prevStep: PropTypes.func.isRequired,

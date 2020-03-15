@@ -10,6 +10,7 @@
     "apollo-client": "^2.6.8",
     "apollo-link-context": "^1.0.19",
     "apollo-link-http": "^1.5.16",
+    "axios": "^0.19.2",
     "formik": "^2.1.4",
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.3",
