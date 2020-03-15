@@ -110,6 +110,7 @@ const UserDetails = ({
                   variant="outlined"
                   fullWidth
                 />
+                <Typography variant="body2" color="textSecondary" align="center">Позволено е посочването на псевдоним</Typography>
                 <Field
                   name="address"
                   label="Адрес на търговския обект"
@@ -130,7 +131,6 @@ const UserDetails = ({
                   variant="outlined"
                   fullWidth
                 />
-                <Typography variant="body2" color="textSecondary" align="center">Позволено е посочването на псевдоним</Typography>
                 <Field
                   type="file"
                   name="photo"
