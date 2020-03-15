@@ -51,7 +51,7 @@ const StepController = () => {
       );
     case 3:
       return (
-        <Confirm formData={formData} sendData={sendDataProcess} prevStep={prevStep} />
+        <Confirm formData={formData} sendDataProcess={sendDataProcess} prevStep={prevStep} />
       );
     default:
       return <Success />;
