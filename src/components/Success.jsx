@@ -5,14 +5,17 @@ All rights reserved.
 shall be included in all copies or substantial portions of the Software.
 */
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Box from '@material-ui/core/Box';
+import {
+  makeStyles,
+  Avatar,
+  CssBaseline,
+  Box,
+  Typography,
+  Link,
+  Grid,
+} from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
