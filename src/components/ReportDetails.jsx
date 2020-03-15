@@ -237,6 +237,9 @@ const ReportDetails = ({
             {' '}
             {new Date().getFullYear()}
             . Всички права запазени!
+            {' '}
+            <br />
+            Faiber не носи отговорност за невярна и грешно подадена информация.
           </Typography>
         </Box>
       </Container>

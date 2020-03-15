@@ -4,7 +4,7 @@ All rights reserved.
 * The above copyright notice and this permission notice
 shall be included in all copies or substantial portions of the Software.
 */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
 import {
@@ -19,6 +19,8 @@ import {
   Typography,
   Container,
 } from '@material-ui/core';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import * as yup from 'yup';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 
@@ -62,6 +64,8 @@ const validationSchema = yup.object({
     .required('Телефона е задължителен'),
 });
 const UserDetails = ({ formData, setFormData, nextStep }) => {
+  const [snackBar, setSnackBar] = useState(true);
+  const handleClose = () => { setSnackBar(false); };
   const classes = useStyles();
   return (
     <>
@@ -149,6 +153,26 @@ const UserDetails = ({ formData, setFormData, nextStep }) => {
             )}
           </Formik>
         </div>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={snackBar}
+          autoHideDuration={30000}
+          onClose={handleClose}
+        >
+          <MuiAlert
+            variant="filled"
+            key="top right"
+            onClose={handleClose}
+            severity="success"
+          >
+            Faibler позволява изпращането на сигнали до областните РЗИ
+            {' '}
+          </MuiAlert>
+
+        </Snackbar>
         <Box mt={8}>
           <Typography variant="body2" color="textSecondary" align="center">
             {'© '}
@@ -159,6 +183,8 @@ const UserDetails = ({ formData, setFormData, nextStep }) => {
             {' '}
             {new Date().getFullYear()}
             . Всички права запазени!
+            <br />
+            Faiber не носи отговорност за невярна и грешно подадена информация.
           </Typography>
         </Box>
       </Container>
