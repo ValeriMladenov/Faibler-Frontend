@@ -115,8 +115,8 @@ const Confirm = ({
               />
               <Field
                 disabled
-                name="city"
-                label="Населено място"
+                name="region"
+                label="Област"
                 margin="normal"
                 as={TextField}
                 variant="outlined"

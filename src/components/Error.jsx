@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
-import CheckIcon from '@material-ui/icons/Check';
+import BugReportIcon from '@material-ui/icons/BugReport';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -23,15 +23,17 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: '#72B452',
+    backgroundColor: theme.palette.secondary.main,
   },
   fab: {
     position: 'fixed',
     bottom: theme.spacing(1),
+    alignItems: 'center',
   },
+
 }));
 
-const Success = () => {
+const Error = () => {
   const classes = useStyles();
   return (
     <>
@@ -48,10 +50,10 @@ const Success = () => {
           <CssBaseline />
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
-              <CheckIcon />
+              <BugReportIcon />
             </Avatar>
             <Typography component="h1" variant="h5" align="center">
-              Сигналът е изпратен
+              Възникна грешка, моля опитайте отново по-късно
             </Typography>
             <Box className={classes.fab}>
               <Typography variant="body2" color="textSecondary" align="center">
@@ -73,4 +75,4 @@ const Success = () => {
   );
 };
 
-export default Success;
+export default Error;

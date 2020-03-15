@@ -5,6 +5,7 @@ All rights reserved.
 shall be included in all copies or substantial portions of the Software.
 */
 import React from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
 import TextField from '@material-ui/core/TextField';
@@ -19,6 +20,10 @@ import Grid from '@material-ui/core/Grid';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import { useQuery } from '@apollo/react-hooks';
+import MenuItem from '@material-ui/core/MenuItem';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { GETALLREGIONS } from '../utils/graphql/queries';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,30 +46,62 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  root: {
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2),
+    },
+  },
 }));
 
 const validationSchema = yup.object({
-  city: yup
-    .string()
-    .required('Населеното място е задължително')
-    .max(20),
-  scname: yup
-    .string()
-    .required('Името на търговския обект е задължително')
-    .max(20),
   address: yup
     .string()
     .required('Адреса е задължителен')
     .max(100),
+  scname: yup
+    .string()
+    .required('Името е задължително')
+    .max(50),
   desc: yup
     .string()
     .required('Описанието е задължително')
     .max(20),
+  region: yup
+    .string()
+    .required('Изберете област'),
 });
-const UserDetails = ({
-  formData, setFormData, prevStep, nextStep,
+const ReportDetails = ({
+  formData, setFormData, prevStep, nextStep, setPicSecureUrl, trowError,
 }) => {
+  const { data, loading } = useQuery(GETALLREGIONS);
   const classes = useStyles();
+
+  const uploadFile = (e) => {
+    const timeStamp = Date.now() / 1000;
+    const upload = new FormData();
+    upload.append('api_key', '653866232188869');
+    upload.append('file', e.target.files[0]);
+    upload.append('public_id', 'report_image');
+    upload.append('timestamp', timeStamp);
+    upload.append('upload_preset', 'reportPhoto');
+
+    axios
+      .post('https://api.cloudinary.com/v1_1/dyiahupok/image/upload', upload)
+      .then((result) => {
+        setPicSecureUrl(result.data.secure_url);
+      })
+      .catch(() => {
+        trowError();
+      });
+  };
+  if (loading) {
+    return (
+      <div className={classes.root}>
+        <CircularProgress />
+      </div>
+    );
+  }
   return (
     <>
       <Container component="main" maxWidth="xs">
@@ -88,24 +125,43 @@ const UserDetails = ({
             }}
             validationSchema={validationSchema}
           >
-            {({ errors, touched }) => (
+            {({
+              values,
+              touched,
+              errors,
+              handleChange,
+            }) => (
               <Form className={classes.form}>
-                <Field
-                  name="city"
-                  label="Населено място на търговския обект"
+                <TextField
+                  select
+                  id="region"
                   margin="normal"
-                  as={TextField}
-                  error={touched.city && errors.city}
-                  helperText={touched.city && errors.city}
+                  error={touched.region && Boolean(errors.region)}
+                  helperText={touched.region && errors.region}
+                  label="Изберете регион"
                   variant="outlined"
+                  value={values.region}
+                  onChange={handleChange('region')}
                   fullWidth
-                />
+                >
+                  {data.getAllRegions.map((regionItem) => (
+                    <MenuItem
+                      key={regionItem
+                        .id}
+                      value={regionItem
+                        .name}
+                    >
+                      {regionItem.name}
+
+                    </MenuItem>
+                  ))}
+                </TextField>
                 <Field
                   name="scname"
                   label="Име на търговския обект"
                   margin="normal"
                   as={TextField}
-                  error={touched.scname && errors.scname}
+                  error={touched.scname && Boolean(errors.scname)}
                   helperText={touched.scname && errors.scname}
                   variant="outlined"
                   fullWidth
@@ -116,7 +172,7 @@ const UserDetails = ({
                   label="Адрес на търговския обект"
                   margin="normal"
                   as={TextField}
-                  error={touched.address && errors.address}
+                  error={touched.address && Boolean(errors.address)}
                   helperText={touched.address && errors.address}
                   variant="outlined"
                   fullWidth
@@ -126,13 +182,14 @@ const UserDetails = ({
                   label="Нарушение (пр. Работещо заведение)"
                   margin="normal"
                   as={TextField}
-                  error={touched.desc && errors.desc}
+                  error={touched.desc && Boolean(errors.desc)}
                   helperText={touched.desc && errors.desc}
                   variant="outlined"
                   fullWidth
                 />
                 <Field
                   type="file"
+                  onChange={uploadFile}
                   name="photo"
                   margin="normal"
                   as={TextField}
@@ -185,9 +242,11 @@ const UserDetails = ({
   );
 };
 
-export default UserDetails;
+export default ReportDetails;
 
-UserDetails.propTypes = {
+ReportDetails.propTypes = {
+  trowError: PropTypes.func.isRequired,
+  setPicSecureUrl: PropTypes.func.isRequired,
   formData: PropTypes.oneOfType([PropTypes.object]).isRequired,
   setFormData: PropTypes.func.isRequired,
   prevStep: PropTypes.func.isRequired,
