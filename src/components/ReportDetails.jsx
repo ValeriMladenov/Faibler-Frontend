@@ -171,7 +171,7 @@ const ReportDetails = ({
                 <Typography variant="body2" color="textSecondary" align="center">Позволено е посочването на псевдоним</Typography>
                 <Field
                   name="address"
-                  label="Адрес на търговския обект"
+                  label="Град и адрес на търговския обект"
                   margin="normal"
                   as={TextField}
                   error={touched.address && Boolean(errors.address)}
