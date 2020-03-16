@@ -184,7 +184,7 @@ const UserDetails = ({ formData, setFormData, nextStep }) => {
             {new Date().getFullYear()}
             . Всички права запазени!
             <br />
-            Faiber не носи отговорност за невярна и грешно подадена информация.
+            Faibler не носи отговорност за невярна и грешно подадена информация.
           </Typography>
         </Box>
       </Container>
