@@ -4,7 +4,7 @@ All rights reserved.
 * The above copyright notice and this permission notice
 shall be included in all copies or substantial portions of the Software.
 */
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
@@ -18,10 +18,12 @@ import {
   Typography,
   Container,
   MenuItem,
+  Snackbar,
   CircularProgress,
 } from '@material-ui/core';
 import * as yup from 'yup';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import MuiAlert from '@material-ui/lab/Alert';
 import { useQuery } from '@apollo/react-hooks';
 import { GETALLREGIONS } from '../utils/graphql/queries';
 import Footer from './Footer';
@@ -76,6 +78,8 @@ const ReportDetails = ({
   formData, setFormData, prevStep, nextStep, setPicSecureUrl, trowError,
 }) => {
   const { data, loading } = useQuery(GETALLREGIONS);
+  const [snackBar, setSnackBar] = useState(true);
+  const handleClose = () => { setSnackBar(false); };
   const classes = useStyles();
 
   const uploadFile = (e) => {
@@ -226,6 +230,31 @@ const ReportDetails = ({
             )}
           </Formik>
         </div>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={snackBar}
+          autoHideDuration={30000}
+          onClose={handleClose}
+        >
+          <MuiAlert
+            variant="filled"
+            key="top right"
+            onClose={handleClose}
+            severity="warning"
+          >
+            Към момента, се забраняват: увеселителни и игрални зали,
+            {' '}
+            <br />
+            дискотеки, барове и ресторанти, заведения за бързо обслужване,
+            <br />
+            {' '}
+            питейни заведения, кафе сладкарници, Молове, Масови мероприятия
+          </MuiAlert>
+
+        </Snackbar>
         <Footer />
       </Container>
     </>
