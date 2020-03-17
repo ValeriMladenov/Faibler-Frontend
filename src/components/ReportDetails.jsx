@@ -4,7 +4,7 @@ All rights reserved.
 * The above copyright notice and this permission notice
 shall be included in all copies or substantial portions of the Software.
 */
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
