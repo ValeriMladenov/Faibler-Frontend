@@ -11,10 +11,10 @@ import {
   CssBaseline,
   Box,
   Typography,
-  Link,
   Grid,
 } from '@material-ui/core';
 import BugReportIcon from '@material-ui/icons/BugReport';
+import Footer from './Footer';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -58,19 +58,7 @@ const Error = () => {
               Възникна грешка, моля опитайте отново по-късно
             </Typography>
             <Box className={classes.fab}>
-              <Typography variant="body2" color="textSecondary" align="center">
-                {'© '}
-
-                <Link color="inherit" href="https://valeri.ml/">
-                  Faibler
-                </Link>
-                {' '}
-                {new Date().getFullYear()}
-                . Всички права запазени!
-                {' '}
-                <br />
-                Faibler не носи отговорност за невярна и грешно подадена информация.
-              </Typography>
+              <Footer />
             </Box>
           </div>
         </Grid>

@@ -14,8 +14,6 @@ import {
   Button,
   Avatar,
   CssBaseline,
-  Link,
-  Box,
   Grid,
   Typography,
   Container,
@@ -26,6 +24,7 @@ import * as yup from 'yup';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import { useQuery } from '@apollo/react-hooks';
 import { GETALLREGIONS } from '../utils/graphql/queries';
+import Footer from './Footer';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -227,21 +226,7 @@ const ReportDetails = ({
             )}
           </Formik>
         </div>
-        <Box mt={8}>
-          <Typography variant="body2" color="textSecondary" align="center">
-            {'© '}
-
-            <Link color="inherit" href="https://valeri.ml/">
-              Faibler
-            </Link>
-            {' '}
-            {new Date().getFullYear()}
-            . Всички права запазени!
-            {' '}
-            <br />
-            Faibler не носи отговорност за невярна и грешно подадена информация.
-          </Typography>
-        </Box>
+        <Footer />
       </Container>
     </>
   );

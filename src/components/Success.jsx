@@ -11,10 +11,10 @@ import {
   CssBaseline,
   Box,
   Typography,
-  Link,
   Grid,
 } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
+import Footer from './Footer';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -57,19 +57,7 @@ const Success = () => {
               Сигналът е изпратен
             </Typography>
             <Box className={classes.fab}>
-              <Typography variant="body2" color="textSecondary" align="center">
-                {'© '}
-
-                <Link color="inherit" href="https://valeri.ml/">
-                  Faibler
-                </Link>
-                {' '}
-                {new Date().getFullYear()}
-                . Всички права запазени!
-                {' '}
-                <br />
-                Faibler не носи отговорност за невярна и грешно подадена информация.
-              </Typography>
+              <Footer />
             </Box>
           </div>
         </Grid>

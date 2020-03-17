@@ -11,8 +11,6 @@ import {
   TextField,
   Avatar,
   CssBaseline,
-  Link,
-  Box,
   Grid,
   Typography,
   Container,
@@ -20,6 +18,7 @@ import {
   makeStyles,
 } from '@material-ui/core/';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import Footer from './Footer';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -181,21 +180,7 @@ const Confirm = ({
             </Form>
           </Formik>
         </div>
-        <Box mt={8}>
-          <Typography variant="body2" color="textSecondary" align="center">
-            {'© '}
-
-            <Link color="inherit" href="https://valeri.ml/">
-              Faibler
-            </Link>
-            {' '}
-            {new Date().getFullYear()}
-            . Всички права запазени!
-            <br />
-            {' '}
-            Faibler не носи отговорност за невярна и грешно подадена информация.
-          </Typography>
-        </Box>
+        <Footer />
       </Container>
     </>
   );

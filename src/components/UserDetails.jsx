@@ -13,9 +13,7 @@ import {
   Button,
   Avatar,
   CssBaseline,
-  Link,
   Grid,
-  Box,
   Typography,
   Container,
 } from '@material-ui/core';
@@ -23,6 +21,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import * as yup from 'yup';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import Footer from './Footer';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -63,7 +62,9 @@ const validationSchema = yup.object({
     .max(13)
     .required('Телефона е задължителен'),
 });
-const UserDetails = ({ formData, setFormData, nextStep }) => {
+const UserDetails = ({
+  formData, setFormData, nextStep, cookie, privacy, howItWorks,
+}) => {
   const [snackBar, setSnackBar] = useState(true);
   const handleClose = () => { setSnackBar(false); };
   const classes = useStyles();
@@ -173,20 +174,7 @@ const UserDetails = ({ formData, setFormData, nextStep }) => {
           </MuiAlert>
 
         </Snackbar>
-        <Box mt={8}>
-          <Typography variant="body2" color="textSecondary" align="center">
-            {'© '}
-
-            <Link color="inherit" href="https://valeri.ml/">
-              Faibler
-            </Link>
-            {' '}
-            {new Date().getFullYear()}
-            . Всички права запазени!
-            <br />
-            Faibler не носи отговорност за невярна и грешно подадена информация.
-          </Typography>
-        </Box>
+        <Footer cookie={cookie} privacy={privacy} howItWorks={howItWorks} />
       </Container>
     </>
   );
@@ -198,4 +186,7 @@ UserDetails.propTypes = {
   formData: PropTypes.oneOfType([PropTypes.object]).isRequired,
   setFormData: PropTypes.func.isRequired,
   nextStep: PropTypes.func.isRequired,
+  cookie: PropTypes.func.isRequired,
+  privacy: PropTypes.func.isRequired,
+  howItWorks: PropTypes.func.isRequired,
 };
