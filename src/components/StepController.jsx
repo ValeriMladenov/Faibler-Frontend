@@ -15,15 +15,16 @@ import { GENERATE_TOKEN, SEND_REPORT } from '../utils/graphql/queries';
 import Cookie from './Cookie';
 import Privacy from './Privacy';
 import HowItWorks from './HowItWorks';
+import Start from './Start';
 
 const StepController = () => {
   const [step, setStep] = useState(1);
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
-  const cookie = () => setStep(5);
-  const privacy = () => setStep(6);
+  const cookie = () => setStep(6);
+  const privacy = () => setStep(7);
   const backHome = () => setStep(1);
-  const howItWorks = () => setStep(7);
+  const howItWorks = () => setStep(8);
 
 
   const trowError = () => setStep(0);
@@ -72,10 +73,20 @@ const StepController = () => {
     sendReport();
   };
   const generateTokenProcess = () => generateToken();
+
   switch (step) {
     case 0:
       return <Error />;
     case 1:
+      return (
+        <Start
+          nextStep={nextStep}
+          cookie={cookie}
+          privacy={privacy}
+          howItWorks={howItWorks}
+        />
+      );
+    case 2:
       return (
         <UserDetails
           formData={formData}
@@ -86,7 +97,7 @@ const StepController = () => {
           howItWorks={howItWorks}
         />
       );
-    case 2:
+    case 3:
       return (
         <ReportDetails
           formData={formData}
@@ -100,7 +111,7 @@ const StepController = () => {
           prevStep={prevStep}
         />
       );
-    case 3:
+    case 4:
       return (
         <Confirm
           formData={formData}
@@ -111,17 +122,17 @@ const StepController = () => {
           prevStep={prevStep}
         />
       );
-    case 4:
-      return <Success />;
     case 5:
+      return <Success />;
+    case 6:
       return (
         <Cookie cookie={cookie} privacy={privacy} howItWorks={howItWorks} backHome={backHome} />
       );
-    case 6:
+    case 7:
       return (
         <Privacy cookie={cookie} privacy={privacy} howItWorks={howItWorks} backHome={backHome} />
       );
-    case 7:
+    case 8:
       return (
         <HowItWorks cookie={cookie} privacy={privacy} howItWorks={howItWorks} backHome={backHome} />
       );

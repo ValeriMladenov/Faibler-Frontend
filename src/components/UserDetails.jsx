@@ -17,8 +17,6 @@ import {
   Typography,
   Container,
 } from '@material-ui/core';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import * as yup from 'yup';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import Footer from './Footer';
@@ -65,8 +63,6 @@ const validationSchema = yup.object({
 const UserDetails = ({
   formData, setFormData, nextStep, cookie, privacy, howItWorks,
 }) => {
-  const [snackBar, setSnackBar] = useState(true);
-  const handleClose = () => { setSnackBar(false); };
   const classes = useStyles();
   return (
     <>
@@ -154,30 +150,6 @@ const UserDetails = ({
             )}
           </Formik>
         </div>
-        <Snackbar
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={snackBar}
-          autoHideDuration={30000}
-          onClose={handleClose}
-        >
-          <MuiAlert
-            variant="filled"
-            key="top right"
-            onClose={handleClose}
-            severity="success"
-          >
-            Faibler автоматизира вашите сигнали и ги изпраща
-            {' '}
-            <br />
-            {' '}
-            директно до  областните Регионални Здравни Инспекции.
-            {' '}
-          </MuiAlert>
-
-        </Snackbar>
         <Footer cookie={cookie} privacy={privacy} howItWorks={howItWorks} />
       </Container>
     </>
