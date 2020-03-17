@@ -9,7 +9,7 @@ import App from './App';
 const cache = new InMemoryCache();
 
 const httpLink = createHttpLink({
-  uri: 'https://faibler.com/graphql',
+  uri: 'https://faibler.herokuapp.com',
 });
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('token');
