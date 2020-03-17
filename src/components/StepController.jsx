@@ -20,10 +20,10 @@ const StepController = () => {
   const [step, setStep] = useState(1);
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
-  const cookie = () => setStep(4);
-  const privacy = () => setStep(5);
+  const cookie = () => setStep(5);
+  const privacy = () => setStep(6);
   const backHome = () => setStep(1);
-  const howItWorks = () => setStep(6);
+  const howItWorks = () => setStep(7);
 
 
   const trowError = () => setStep(0);
@@ -55,7 +55,7 @@ const StepController = () => {
   });
   const [sendReport] = useMutation(SEND_REPORT, {
     onCompleted: () => {
-      nextStep();
+      setStep();
     },
     onError: () => {
       trowError();
@@ -112,14 +112,16 @@ const StepController = () => {
         />
       );
     case 4:
+      return <Success />;
+    case 5:
       return (
         <Cookie cookie={cookie} privacy={privacy} howItWorks={howItWorks} backHome={backHome} />
       );
-    case 5:
+    case 6:
       return (
         <Privacy cookie={cookie} privacy={privacy} howItWorks={howItWorks} backHome={backHome} />
       );
-    case 6:
+    case 7:
       return (
         <HowItWorks cookie={cookie} privacy={privacy} howItWorks={howItWorks} backHome={backHome} />
       );
