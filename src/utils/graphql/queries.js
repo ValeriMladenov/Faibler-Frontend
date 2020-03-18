@@ -33,7 +33,6 @@ mutation newReport(
   $address: String!
   $region: String!
   $description: String!
-  $photo: String!
 ) {
   newReport(
     newReportInput: {
@@ -41,7 +40,6 @@ mutation newReport(
       address: $address
       region: $region
       description: $description
-      photo: $photo
     }
   )
 }

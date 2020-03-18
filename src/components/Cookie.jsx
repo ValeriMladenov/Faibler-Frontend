@@ -48,7 +48,7 @@ const Cookie = ({
           <Typography variant="h2" component="h1" gutterBottom>
             Бисквитки
           </Typography>
-          <Typography variant="p" component="p" gutterBottom>
+          <Typography variant="body2" gutterBottom>
             Бисквитки
             Нашият уеб сайт използва така наречените „бисквитки“. Това са малки текстови файлове,
             които се зареждат в браузъра и се съхраняват на Вашето крайно устройство.

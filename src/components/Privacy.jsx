@@ -45,10 +45,10 @@ const Privacy = ({
       <div className={classes.root}>
         <CssBaseline />
         <Container component="main" className={classes.main} maxWidth="sm">
-          <Typography variant="h2" component="h1" gutterBottom>
+          <Typography variant="h2" gutterBottom>
             Лични данни
           </Typography>
-          <Typography variant="p" component="p" gutterBottom>
+          <Typography variant="body2" gutterBottom>
             Посещавайки Уебсайта, Вие можете да предоставите лични данни,
             като вашето име, фамилия, телефон и имейл за да използвате предлаганите услуги.
 

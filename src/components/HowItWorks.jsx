@@ -48,7 +48,7 @@ const HowItWorks = ({
           <Typography variant="h2" component="h1" gutterBottom>
             Как работи?
           </Typography>
-          <Typography variant="p" component="p" gutterBottom>
+          <Typography variant="body2" gutterBottom>
             След като попълните формата за сигнал на сайта ни,
             това задейства стриктен автоматизиран проект, ще подготвим сигнала Ви
             ще го изпратим до Регионалната Здравна Инспекция на областа, която се

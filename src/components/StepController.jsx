@@ -38,7 +38,6 @@ const StepController = () => {
     scname: '',
     desc: '',
   });
-  const [picSecureUrl, setPicSecureUrl] = useState('');
   const [generateToken] = useMutation(GENERATE_TOKEN, {
     onCompleted: (result) => {
       localStorage.setItem('token', result.generateToken);
@@ -66,7 +65,6 @@ const StepController = () => {
       address: formData.address,
       region: formData.region,
       description: formData.desc,
-      photo: picSecureUrl,
     },
   });
   const sendDataProcess = () => {
@@ -76,7 +74,13 @@ const StepController = () => {
 
   switch (step) {
     case 0:
-      return <Error />;
+      return (
+        <Error
+          cookie={cookie}
+          privacy={privacy}
+          howItWorks={howItWorks}
+        />
+      );
     case 1:
       return (
         <Start
@@ -102,11 +106,9 @@ const StepController = () => {
         <ReportDetails
           formData={formData}
           setFormData={setFormData}
-          setPicSecureUrl={setPicSecureUrl}
           cookie={cookie}
           privacy={privacy}
           howItWorks={howItWorks}
-          trowError={trowError}
           nextStep={nextStep}
           prevStep={prevStep}
         />
@@ -123,7 +125,13 @@ const StepController = () => {
         />
       );
     case 5:
-      return <Success />;
+      return (
+        <Success
+          cookie={cookie}
+          privacy={privacy}
+          howItWorks={howItWorks}
+        />
+      );
     case 6:
       return (
         <Cookie cookie={cookie} privacy={privacy} howItWorks={howItWorks} backHome={backHome} />
@@ -137,7 +145,13 @@ const StepController = () => {
         <HowItWorks cookie={cookie} privacy={privacy} howItWorks={howItWorks} backHome={backHome} />
       );
     default:
-      return <Success />;
+      return (
+        <Success
+          cookie={cookie}
+          privacy={privacy}
+          howItWorks={howItWorks}
+        />
+      );
   }
 };
 export default StepController;
