@@ -16,6 +16,7 @@ import Cookie from './Cookie';
 import Privacy from './Privacy';
 import HowItWorks from './HowItWorks';
 import Start from './Start';
+import Loading from './Loading';
 
 const StepController = () => {
   const [step, setStep] = useState(1);
@@ -38,7 +39,7 @@ const StepController = () => {
     scname: '',
     desc: '',
   });
-  const [generateToken] = useMutation(GENERATE_TOKEN, {
+  const [generateToken, { loading: loadingToken }] = useMutation(GENERATE_TOKEN, {
     onCompleted: (result) => {
       localStorage.setItem('token', result.generateToken);
       nextStep();
@@ -53,7 +54,7 @@ const StepController = () => {
       phone: formData.phone,
     },
   });
-  const [sendReport] = useMutation(SEND_REPORT, {
+  const [sendReport, { loading: loadingSend }] = useMutation(SEND_REPORT, {
     onCompleted: () => {
       setStep();
     },
@@ -71,7 +72,7 @@ const StepController = () => {
     sendReport();
   };
   const generateTokenProcess = () => generateToken();
-
+  if (loadingToken || loadingSend) return <Loading />;
   switch (step) {
     case 0:
       return (
