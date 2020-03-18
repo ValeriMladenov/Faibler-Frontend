@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Confirm = ({
-  formData, prevStep, sendDataProcess,
+  formData, prevStep, sendDataProcess, cookie, privacy, howItWorks,
 }) => {
   const classes = useStyles();
   return (
@@ -180,7 +180,7 @@ const Confirm = ({
             </Form>
           </Formik>
         </div>
-        <Footer />
+        <Footer cookie={cookie} privacy={privacy} howItWorks={howItWorks} />
       </Container>
     </>
   );
@@ -192,4 +192,8 @@ Confirm.propTypes = {
   formData: PropTypes.oneOfType([PropTypes.object]).isRequired,
   prevStep: PropTypes.func.isRequired,
   sendDataProcess: PropTypes.func.isRequired,
+  cookie: PropTypes.func.isRequired,
+  privacy: PropTypes.func.isRequired,
+  howItWorks: PropTypes.func.isRequired,
+
 };

@@ -4,7 +4,9 @@ All rights reserved.
 * The above copyright notice and this permission notice
 shall be included in all copies or substantial portions of the Software.
 */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   makeStyles,
   Avatar,
@@ -35,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const Error = () => {
+const Error = ({ cookie, privacy, howItWorks }) => {
   const classes = useStyles();
   return (
     <>
@@ -58,7 +60,7 @@ const Error = () => {
               Възникна грешка, моля опитайте отново по-късно
             </Typography>
             <Box className={classes.fab}>
-              <Footer />
+              <Footer cookie={cookie} privacy={privacy} howItWorks={howItWorks} />
             </Box>
           </div>
         </Grid>
@@ -69,3 +71,9 @@ const Error = () => {
 };
 
 export default Error;
+
+Error.propTypes = {
+  cookie: PropTypes.func.isRequired,
+  privacy: PropTypes.func.isRequired,
+  howItWorks: PropTypes.func.isRequired,
+};

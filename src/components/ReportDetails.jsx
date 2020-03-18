@@ -5,7 +5,6 @@ All rights reserved.
 shall be included in all copies or substantial portions of the Software.
 */
 import React from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Formik, Form, Field } from 'formik';
 import {
@@ -73,29 +72,10 @@ const validationSchema = yup.object({
     .required('Изберете област'),
 });
 const ReportDetails = ({
-  formData, setFormData, prevStep, nextStep, setPicSecureUrl, trowError,
+  formData, setFormData, prevStep, nextStep, cookie, privacy, howItWorks,
 }) => {
   const { data, loading } = useQuery(GETALLREGIONS);
   const classes = useStyles();
-
-  const uploadFile = (e) => {
-    const timeStamp = Date.now() / 1000;
-    const upload = new FormData();
-    upload.append('api_key', '653866232188869');
-    upload.append('file', e.target.files[0]);
-    upload.append('public_id', 'report_image');
-    upload.append('timestamp', timeStamp);
-    upload.append('upload_preset', 'reportPhoto');
-
-    axios
-      .post('https://api.cloudinary.com/v1_1/dyiahupok/image/upload', upload)
-      .then((result) => {
-        setPicSecureUrl(result.data.secure_url);
-      })
-      .catch(() => {
-        trowError();
-      });
-  };
   if (loading) {
     return (
       <div className={classes.root}>
@@ -188,16 +168,6 @@ const ReportDetails = ({
                   variant="outlined"
                   fullWidth
                 />
-                <Field
-                  type="file"
-                  onChange={(e) => uploadFile(e)}
-                  name="photo"
-                  as={TextField}
-                  margin="normal"
-                  variant="outlined"
-                  fullWidth
-                />
-                <Typography variant="body2" color="textSecondary" align="center">Снимката не е задълнителна</Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <Button
@@ -226,7 +196,7 @@ const ReportDetails = ({
             )}
           </Formik>
         </div>
-        <Footer />
+        <Footer cookie={cookie} privacy={privacy} howItWorks={howItWorks} />
       </Container>
     </>
   );
@@ -235,10 +205,11 @@ const ReportDetails = ({
 export default ReportDetails;
 
 ReportDetails.propTypes = {
-  trowError: PropTypes.func.isRequired,
-  setPicSecureUrl: PropTypes.func.isRequired,
   formData: PropTypes.oneOfType([PropTypes.object]).isRequired,
   setFormData: PropTypes.func.isRequired,
   prevStep: PropTypes.func.isRequired,
   nextStep: PropTypes.func.isRequired,
+  cookie: PropTypes.func.isRequired,
+  privacy: PropTypes.func.isRequired,
+  howItWorks: PropTypes.func.isRequired,
 };
