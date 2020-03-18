@@ -66,7 +66,7 @@ const validationSchema = yup.object({
   desc: yup
     .string()
     .required('Описанието е задължително')
-    .max(20),
+    .max(30, 'Описанието трябва да е максимум 30 символа'),
   region: yup
     .string()
     .required('Изберете област'),
