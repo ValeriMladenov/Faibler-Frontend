@@ -4,9 +4,9 @@ All rights reserved.
 * The above copyright notice and this permission notice
 shall be included in all copies or substantial portions of the Software.
 */
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Formik, Form, Field } from 'formik';
+import React from "react";
+import PropTypes from "prop-types";
+import { Formik, Form, Field } from "formik";
 import {
   TextField,
   Avatar,
@@ -16,26 +16,26 @@ import {
   Container,
   Button,
   makeStyles,
-} from '@material-ui/core/';
-import ReportProblemIcon from '@material-ui/icons/ReportProblem';
-import Footer from './Footer';
+} from "@material-ui/core/";
+import ReportProblemIcon from "@material-ui/icons/ReportProblem";
+import Footer from "./Footer";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   formControl: {
-    width: '100%',
+    width: "100%",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -44,7 +44,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Confirm = ({
-  formData, prevStep, sendDataProcess, cookie, privacy, howItWorks,
+  formData,
+  prevStep,
+  sendDataProcess,
+  cookie,
+  privacy,
+  howItWorks,
 }) => {
   const classes = useStyles();
   return (
@@ -56,11 +61,7 @@ const Confirm = ({
             <ReportProblemIcon />
           </Avatar>
           <Typography component="h1" variant="h5" align="center">
-            Подаване на сигнал
-            {' '}
-            <br />
-            {' '}
-            (Проверка на попълнените данни)
+            Подаване на сигнал <br /> (Проверка на попълнените данни)
           </Typography>
           <Formik
             initialValues={formData}
@@ -100,7 +101,6 @@ const Confirm = ({
                 label="Имейл"
                 margin="normal"
                 as={TextField}
-
                 variant="outlined"
                 fullWidth
               />
@@ -195,5 +195,4 @@ Confirm.propTypes = {
   cookie: PropTypes.func.isRequired,
   privacy: PropTypes.func.isRequired,
   howItWorks: PropTypes.func.isRequired,
-
 };

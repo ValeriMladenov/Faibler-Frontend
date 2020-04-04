@@ -4,9 +4,9 @@ All rights reserved.
 * The above copyright notice and this permission notice
 shall be included in all copies or substantial portions of the Software.
 */
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Formik, Form, Field } from 'formik';
+import React from "react";
+import PropTypes from "prop-types";
+import { Formik, Form, Field } from "formik";
 import {
   TextField,
   makeStyles,
@@ -16,24 +16,24 @@ import {
   Grid,
   Typography,
   Container,
-} from '@material-ui/core';
-import * as yup from 'yup';
-import ReportProblemIcon from '@material-ui/icons/ReportProblem';
-import Footer from './Footer';
+} from "@material-ui/core";
+import * as yup from "yup";
+import ReportProblemIcon from "@material-ui/icons/ReportProblem";
+import Footer from "./Footer";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -43,25 +43,25 @@ const useStyles = makeStyles((theme) => ({
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const validationSchema = yup.object({
-  firstName: yup
-    .string()
-    .required('Името е задължително')
-    .max(20),
-  lastName: yup
-    .string()
-    .required('Фамилията е задължителна')
-    .max(20),
+  firstName: yup.string().required("Името е задължително").max(20),
+  lastName: yup.string().required("Фамилията е задължителна").max(20),
   email: yup
     .string()
-    .email('Невалиден имейл')
-    .required('Имейла е задължителен'),
+    .email("Невалиден имейл")
+    .required("Имейла е задължителен"),
   phone: yup
-    .string().matches(phoneRegExp, 'Телефонния номер не е валиден')
+    .string()
+    .matches(phoneRegExp, "Телефонния номер не е валиден")
     .max(13)
-    .required('Телефона е задължителен'),
+    .required("Телефона е задължителен"),
 });
 const UserDetails = ({
-  formData, setFormData, nextStep, cookie, privacy, howItWorks,
+  formData,
+  setFormData,
+  nextStep,
+  cookie,
+  privacy,
+  howItWorks,
 }) => {
   const classes = useStyles();
   return (
@@ -73,11 +73,7 @@ const UserDetails = ({
             <ReportProblemIcon />
           </Avatar>
           <Typography component="h1" variant="h5" align="center">
-            Подаване на сигнал
-            {' '}
-            <br />
-            {' '}
-            (Лична информация)
+            Подаване на сигнал <br /> (Лична информация)
           </Typography>
           <Formik
             initialValues={formData}
