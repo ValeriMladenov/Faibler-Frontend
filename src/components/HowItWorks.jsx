@@ -4,7 +4,7 @@ All rights reserved.
 * The above copyright notice and this permission notice
 shall be included in all copies or substantial portions of the Software.
 */
-import React from "react";
+import React from 'react';
 import {
   Button,
   Box,
@@ -12,15 +12,15 @@ import {
   makeStyles,
   Container,
   CssBaseline,
-} from "@material-ui/core";
-import PropTypes from "prop-types";
-import Footer from "./Footer";
+} from '@material-ui/core';
+import PropTypes from 'prop-types';
+import Footer from './Footer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
   },
   main: {
     marginTop: theme.spacing(8),
@@ -30,12 +30,14 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   fab: {
-    position: "fixed",
+    position: 'fixed',
     bottom: theme.spacing(1),
   },
 }));
 
-const HowItWorks = ({ backHome, cookie, privacy, howItWorks }) => {
+const HowItWorks = ({
+  backHome, cookie, privacy, howItWorks,
+}) => {
   const classes = useStyles();
 
   return (
@@ -47,9 +49,9 @@ const HowItWorks = ({ backHome, cookie, privacy, howItWorks }) => {
             Как работи?
           </Typography>
           <Typography variant="body2" gutterBottom>
-            След като попълните формата за сигнал на сайта ни, това задейства
-            стриктен автоматизиран проект, ще подготвим сигнала Ви ще го
-            изпратим до Регионалната Здравна Инспекция на областа, която се
+            След като попълните формата за сигнал на сайта ни,
+            това задейства стриктен автоматизиран проект, ще подготвим сигнала Ви
+            ще го изпратим до Регионалната Здравна Инспекция на областа, която се
             избрали при подаването на сигнала!
           </Typography>
           <Button

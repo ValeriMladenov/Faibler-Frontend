@@ -5,8 +5,8 @@ All rights reserved.
 shall be included in all copies or substantial portions of the Software.
 */
 
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   makeStyles,
   Avatar,
@@ -14,26 +14,27 @@ import {
   Box,
   Typography,
   Grid,
-} from "@material-ui/core";
-import BugReportIcon from "@material-ui/icons/BugReport";
-import Footer from "./Footer";
+} from '@material-ui/core';
+import BugReportIcon from '@material-ui/icons/BugReport';
+import Footer from './Footer';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   fab: {
-    position: "fixed",
+    position: 'fixed',
     bottom: theme.spacing(1),
-    alignItems: "center",
+    alignItems: 'center',
   },
+
 }));
 
 const Error = ({ cookie, privacy, howItWorks }) => {
@@ -46,8 +47,9 @@ const Error = ({ cookie, privacy, howItWorks }) => {
         direction="column"
         alignItems="center"
         justify="center"
-        style={{ minHeight: "100vh" }}
+        style={{ minHeight: '100vh' }}
       >
+
         <Grid>
           <CssBaseline />
           <div className={classes.paper}>
@@ -58,15 +60,12 @@ const Error = ({ cookie, privacy, howItWorks }) => {
               Възникна грешка, моля опитайте отново по-късно
             </Typography>
             <Box className={classes.fab}>
-              <Footer
-                cookie={cookie}
-                privacy={privacy}
-                howItWorks={howItWorks}
-              />
+              <Footer cookie={cookie} privacy={privacy} howItWorks={howItWorks} />
             </Box>
           </div>
         </Grid>
       </Grid>
+
     </>
   );
 };

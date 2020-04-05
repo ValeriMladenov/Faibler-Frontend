@@ -4,19 +4,19 @@ All rights reserved.
 * The above copyright notice and this permission notice
 shall be included in all copies or substantial portions of the Software.
 */
-import React, { useState } from "react";
-import { useMutation } from "@apollo/react-hooks";
-import UserDetails from "./UserDetails";
-import ReportDetails from "./ReportDetails";
-import Confirm from "./Confirm";
-import Success from "./Success";
-import Error from "./Error";
-import { GENERATE_TOKEN, SEND_REPORT } from "../utils/graphql/queries";
-import Cookie from "./Cookie";
-import Privacy from "./Privacy";
-import HowItWorks from "./HowItWorks";
-import Start from "./Start";
-import Loading from "./Loading";
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import UserDetails from './UserDetails';
+import ReportDetails from './ReportDetails';
+import Confirm from './Confirm';
+import Success from './Success';
+import Error from './Error';
+import { GENERATE_TOKEN, SEND_REPORT } from '../utils/graphql/queries';
+import Cookie from './Cookie';
+import Privacy from './Privacy';
+import HowItWorks from './HowItWorks';
+import Start from './Start';
+import Loading from './Loading';
 
 const StepController = () => {
   const [step, setStep] = useState(1);
@@ -27,35 +27,33 @@ const StepController = () => {
   const backHome = () => setStep(1);
   const howItWorks = () => setStep(8);
 
+
   const trowError = () => setStep(0);
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    phone: "",
-    email: "",
-    region: "",
-    address: "",
-    scname: "",
-    desc: "",
+    firstName: '',
+    lastName: '',
+    phone: '',
+    email: '',
+    region: '',
+    address: '',
+    scname: '',
+    desc: '',
   });
-  const [generateToken, { loading: loadingToken }] = useMutation(
-    GENERATE_TOKEN,
-    {
-      onCompleted: (result) => {
-        localStorage.setItem("token", result.generateToken);
-        nextStep();
-      },
-      onError: () => {
-        trowError();
-      },
-      variables: {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-      },
+  const [generateToken, { loading: loadingToken }] = useMutation(GENERATE_TOKEN, {
+    onCompleted: (result) => {
+      localStorage.setItem('token', result.generateToken);
+      nextStep();
     },
-  );
+    onError: () => {
+      trowError();
+    },
+    variables: {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+    },
+  });
   const [sendReport, { loading: loadingSend }] = useMutation(SEND_REPORT, {
     onCompleted: () => {
       setStep();
@@ -78,7 +76,11 @@ const StepController = () => {
   switch (step) {
     case 0:
       return (
-        <Error cookie={cookie} privacy={privacy} howItWorks={howItWorks} />
+        <Error
+          cookie={cookie}
+          privacy={privacy}
+          howItWorks={howItWorks}
+        />
       );
     case 1:
       return (
@@ -125,38 +127,31 @@ const StepController = () => {
       );
     case 5:
       return (
-        <Success cookie={cookie} privacy={privacy} howItWorks={howItWorks} />
+        <Success
+          cookie={cookie}
+          privacy={privacy}
+          howItWorks={howItWorks}
+        />
       );
     case 6:
       return (
-        <Cookie
-          cookie={cookie}
-          privacy={privacy}
-          howItWorks={howItWorks}
-          backHome={backHome}
-        />
+        <Cookie cookie={cookie} privacy={privacy} howItWorks={howItWorks} backHome={backHome} />
       );
     case 7:
       return (
-        <Privacy
-          cookie={cookie}
-          privacy={privacy}
-          howItWorks={howItWorks}
-          backHome={backHome}
-        />
+        <Privacy cookie={cookie} privacy={privacy} howItWorks={howItWorks} backHome={backHome} />
       );
     case 8:
       return (
-        <HowItWorks
-          cookie={cookie}
-          privacy={privacy}
-          howItWorks={howItWorks}
-          backHome={backHome}
-        />
+        <HowItWorks cookie={cookie} privacy={privacy} howItWorks={howItWorks} backHome={backHome} />
       );
     default:
       return (
-        <Success cookie={cookie} privacy={privacy} howItWorks={howItWorks} />
+        <Success
+          cookie={cookie}
+          privacy={privacy}
+          howItWorks={howItWorks}
+        />
       );
   }
 };

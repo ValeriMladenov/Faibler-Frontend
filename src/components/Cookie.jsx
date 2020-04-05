@@ -4,7 +4,7 @@ All rights reserved.
 * The above copyright notice and this permission notice
 shall be included in all copies or substantial portions of the Software.
 */
-import React from "react";
+import React from 'react';
 import {
   Button,
   Box,
@@ -12,15 +12,15 @@ import {
   makeStyles,
   Container,
   CssBaseline,
-} from "@material-ui/core";
-import PropTypes from "prop-types";
-import Footer from "./Footer";
+} from '@material-ui/core';
+import PropTypes from 'prop-types';
+import Footer from './Footer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100vh",
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
   },
   main: {
     marginTop: theme.spacing(8),
@@ -30,12 +30,14 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   fab: {
-    position: "fixed",
+    position: 'fixed',
     bottom: theme.spacing(1),
   },
 }));
 
-const Cookie = ({ backHome, cookie, privacy, howItWorks }) => {
+const Cookie = ({
+  backHome, cookie, privacy, howItWorks,
+}) => {
   const classes = useStyles();
 
   return (
@@ -47,13 +49,13 @@ const Cookie = ({ backHome, cookie, privacy, howItWorks }) => {
             Бисквитки
           </Typography>
           <Typography variant="body2" gutterBottom>
-            Бисквитки Нашият уеб сайт използва така наречените „бисквитки“. Това
-            са малки текстови файлове, които се зареждат в браузъра и се
-            съхраняват на Вашето крайно устройство. Те са безобидни. Използваме
-            ги, за да поддържаме сайта си лесен за употреба. Някои „бисквитки“
-            остават съхранени на устройството Ви, докато не ги изтриете. Те ни
-            позволяват да разпознаем Вашия браузър при следващото ви посещение в
-            нашия сайт.
+            Бисквитки
+            Нашият уеб сайт използва така наречените „бисквитки“. Това са малки текстови файлове,
+            които се зареждат в браузъра и се съхраняват на Вашето крайно устройство.
+            Те са безобидни.
+            Използваме ги, за да поддържаме сайта си лесен за употреба. Някои „бисквитки“
+            остават съхранени на устройството Ви, докато не ги изтриете. Те ни позволяват да
+            разпознаем Вашия браузър при следващото ви посещение в нашия сайт.
           </Typography>
           <Button
             variant="contained"
