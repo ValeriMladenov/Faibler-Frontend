@@ -4,9 +4,9 @@ All rights reserved.
 * The above copyright notice and this permission notice
 shall be included in all copies or substantial portions of the Software.
 */
-import React from "react";
-import PropTypes from "prop-types";
-import { Formik, Form, Field } from "formik";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Formik, Form, Field } from 'formik';
 import {
   TextField,
   makeStyles,
@@ -16,25 +16,25 @@ import {
   Grid,
   Typography,
   Container,
-} from "@material-ui/core";
-import * as yup from "yup";
-import ReportProblemIcon from "@material-ui/icons/ReportProblem";
-import Footer from "./Footer";
-import { INPUT_REGEX, INPUT_REGEX_ERROR } from "../const/regex";
+} from '@material-ui/core';
+import * as yup from 'yup';
+import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import Footer from './Footer';
+import { INPUT_REGEX, INPUT_REGEX_ERROR } from '../const/regex';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -47,23 +47,23 @@ const validationSchema = yup.object({
   firstName: yup
     .string()
     .matches(INPUT_REGEX, INPUT_REGEX_ERROR)
-    .required("Името е задължително")
+    .required('Името е задължително')
     .max(20),
   lastName: yup
     .string()
     .matches(INPUT_REGEX, INPUT_REGEX_ERROR)
-    .required("Фамилията е задължителна")
+    .required('Фамилията е задължителна')
     .max(20),
   email: yup
     .string()
     .matches(INPUT_REGEX, INPUT_REGEX_ERROR)
-    .email("Невалиден имейл")
-    .required("Имейла е задължителен"),
+    .email('Невалиден имейл')
+    .required('Имейла е задължителен'),
   phone: yup
     .string()
-    .matches(phoneRegExp, "Телефонния номер не е валиден")
+    .matches(phoneRegExp, 'Телефонния номер не е валиден')
     .max(13)
-    .required("Телефона е задължителен"),
+    .required('Телефона е задължителен'),
 });
 const UserDetails = ({
   formData,
@@ -83,7 +83,11 @@ const UserDetails = ({
             <ReportProblemIcon />
           </Avatar>
           <Typography component="h1" variant="h5" align="center">
-            Подаване на сигнал <br /> (Лична информация)
+            Подаване на сигнал
+            {' '}
+            <br />
+            {' '}
+            (Лична информация)
           </Typography>
           <Formik
             initialValues={formData}
