@@ -24,6 +24,7 @@ import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import { useQuery } from '@apollo/react-hooks';
 import { GETALLREGIONS } from '../utils/graphql/queries';
 import Footer from './Footer';
+import { INPUT_REGEX, INPUT_REGEX_ERROR } from '../const/regex';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -57,22 +58,32 @@ const useStyles = makeStyles((theme) => ({
 const validationSchema = yup.object({
   address: yup
     .string()
+    .matches(INPUT_REGEX, INPUT_REGEX_ERROR)
     .required('Адреса е задължителен')
     .max(100),
   scname: yup
     .string()
+    .matches(INPUT_REGEX, INPUT_REGEX_ERROR)
     .required('Името е задължително')
     .max(50),
   desc: yup
     .string()
+    .matches(INPUT_REGEX, INPUT_REGEX_ERROR)
     .required('Описанието е задължително')
     .max(30, 'Описанието трябва да е максимум 30 символа'),
   region: yup
     .string()
+    .matches(INPUT_REGEX, INPUT_REGEX_ERROR)
     .required('Изберете област'),
 });
 const ReportDetails = ({
-  formData, setFormData, prevStep, nextStep, cookie, privacy, howItWorks,
+  formData,
+  setFormData,
+  prevStep,
+  nextStep,
+  cookie,
+  privacy,
+  howItWorks,
 }) => {
   const { data, loading } = useQuery(GETALLREGIONS);
   const classes = useStyles();
@@ -107,10 +118,7 @@ const ReportDetails = ({
             validationSchema={validationSchema}
           >
             {({
-              values,
-              touched,
-              errors,
-              handleChange,
+              values, touched, errors, handleChange,
             }) => (
               <Form className={classes.form}>
                 <TextField
@@ -126,14 +134,8 @@ const ReportDetails = ({
                   fullWidth
                 >
                   {data.getAllRegions.map((regionItem) => (
-                    <MenuItem
-                      key={regionItem
-                        .id}
-                      value={regionItem
-                        .name}
-                    >
+                    <MenuItem key={regionItem.id} value={regionItem.name}>
                       {regionItem.name}
-
                     </MenuItem>
                   ))}
                 </TextField>
@@ -147,7 +149,13 @@ const ReportDetails = ({
                   variant="outlined"
                   fullWidth
                 />
-                <Typography variant="body2" color="textSecondary" align="center">Позволено е посочването на псевдоним</Typography>
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  align="center"
+                >
+                  Позволено е посочването на псевдоним
+                </Typography>
                 <Field
                   name="address"
                   label="Град и адрес на търговския обект"
