@@ -20,6 +20,7 @@ import {
 import * as yup from "yup";
 import ReportProblemIcon from "@material-ui/icons/ReportProblem";
 import Footer from "./Footer";
+import { INPUT_REGEX, INPUT_REGEX_ERROR } from "../const/regex";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -43,10 +44,19 @@ const useStyles = makeStyles((theme) => ({
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const validationSchema = yup.object({
-  firstName: yup.string().required("Името е задължително").max(20),
-  lastName: yup.string().required("Фамилията е задължителна").max(20),
+  firstName: yup
+    .string()
+    .matches(INPUT_REGEX, INPUT_REGEX_ERROR)
+    .required("Името е задължително")
+    .max(20),
+  lastName: yup
+    .string()
+    .matches(INPUT_REGEX, INPUT_REGEX_ERROR)
+    .required("Фамилията е задължителна")
+    .max(20),
   email: yup
     .string()
+    .matches(INPUT_REGEX, INPUT_REGEX_ERROR)
     .email("Невалиден имейл")
     .required("Имейла е задължителен"),
   phone: yup

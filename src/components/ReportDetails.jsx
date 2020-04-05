@@ -24,6 +24,7 @@ import ReportProblemIcon from "@material-ui/icons/ReportProblem";
 import { useQuery } from "@apollo/react-hooks";
 import { GETALLREGIONS } from "../utils/graphql/queries";
 import Footer from "./Footer";
+import { INPUT_REGEX, INPUT_REGEX_ERROR } from "../const/regex";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -55,13 +56,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const validationSchema = yup.object({
-  address: yup.string().required("Адреса е задължителен").max(100),
-  scname: yup.string().required("Името е задължително").max(50),
+  address: yup
+    .string()
+    .matches(INPUT_REGEX, INPUT_REGEX_ERROR)
+    .required("Адреса е задължителен")
+    .max(100),
+  scname: yup
+    .string()
+    .matches(INPUT_REGEX, INPUT_REGEX_ERROR)
+    .required("Името е задължително")
+    .max(50),
   desc: yup
     .string()
+    .matches(INPUT_REGEX, INPUT_REGEX_ERROR)
     .required("Описанието е задължително")
     .max(30, "Описанието трябва да е максимум 30 символа"),
-  region: yup.string().required("Изберете област"),
+  region: yup
+    .string()
+    .matches(INPUT_REGEX, INPUT_REGEX_ERROR)
+    .required("Изберете област"),
 });
 const ReportDetails = ({
   formData,
